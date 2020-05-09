@@ -9,25 +9,26 @@ $(document).ready(function() {
     $(".description").each(function() {
         $(this).val(localStorage.getItem("event" + $(this).attr("data-hour")));
     })
-    //Timer compares current hour vs the associated block hour and assigns the past present/future class appropriately.  Removes any other classes that may have been assigned at another hour.  Updates every second.
+    //Timer compares current hour vs the associated block hour and assigns the past present/future class appropriately.  Removes any other classes that may have been assigned at another hour.  Updates every second. New date variable that's consisitenly updated.
     function startTimer() {
         var interval = setInterval(function() {
-                $(".description").each(function(){
-                    var currentHour = parseInt($(this).attr("data-hour"));
-                    if(currentHour < dateVar.getHours()) {
-                        $(this).removeClass("future");
-                        $(this).removeClass("present");
-                        $(this).addClass("past");
-                    } else if(currentHour > dateVar.getHours()) {
-                        $(this).removeClass("present");
-                        $(this).removeClass("past");
-                        $(this).addClass("future");
-                    } else if(currentHour === dateVar.getHours()) {
-                        $(this).removeClass("future");
-                        $(this).removeClass("past");
-                        $(this).addClass("present");
-                    }
-                })
+            var dateVar2 = new Date();
+            $(".description").each(function(){
+                var currentHour = parseInt($(this).attr("data-hour"));
+                if(currentHour < dateVar2.getHours()) {
+                    $(this).removeClass("future");
+                    $(this).removeClass("present");
+                    $(this).addClass("past");
+                } else if(currentHour > dateVar2.getHours()) {
+                    $(this).removeClass("present");
+                    $(this).removeClass("past");
+                    $(this).addClass("future");
+                } else if(currentHour === dateVar2.getHours()) {
+                    $(this).removeClass("future");
+                    $(this).removeClass("past");
+                    $(this).addClass("present");
+                }
+            })
         }, 1000)
     }
     //Assigns on click to every button, saves the textarea text to the conveinince variable calEvent and then sets the associated local storage space
