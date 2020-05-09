@@ -12,21 +12,15 @@ $(document).ready(function() {
     //Timer compares current hour vs the associated block hour and assigns the past present/future class appropriately.  Removes any other classes that may have been assigned at another hour.  Updates every second. New date variable that's consisitenly updated.
     function startTimer() {
         var interval = setInterval(function() {
-            var dateVar2 = new Date();
+            var dateVar2 = new Date();   
             $(".description").each(function(){
                 var currentHour = parseInt($(this).attr("data-hour"));
                 if(currentHour < dateVar2.getHours()) {
-                    $(this).removeClass("future");
-                    $(this).removeClass("present");
-                    $(this).addClass("past");
+                    $(this).removeClass("future present").addClass("past");
                 } else if(currentHour > dateVar2.getHours()) {
-                    $(this).removeClass("present");
-                    $(this).removeClass("past");
-                    $(this).addClass("future");
+                    $(this).removeClass("present past").addClass("future");
                 } else if(currentHour === dateVar2.getHours()) {
-                    $(this).removeClass("future");
-                    $(this).removeClass("past");
-                    $(this).addClass("present");
+                    $(this).removeClass("future past").addClass("present");
                 }
             })
         }, 1000)
